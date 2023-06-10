@@ -1,4 +1,4 @@
-# CloudNativeExams
+# Cloud Native Exams
 
 ### This project serves two primary purposes. The first, to continue growing and refining my AWS skillset by constructing something that provides genuine value to both friends and colleagues, in this instance turning a set of bland, JavaScript based, AWS practice exams into a cloud-native, serverless, full-stack application (hosted freely!) 
 
