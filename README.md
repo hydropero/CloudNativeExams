@@ -18,4 +18,8 @@ Features were implemented using a variety of AWS services:
 
 ### The second purpose was to gamify the otherwise tiresome process of practice exam taking. Whether you're competitive and want to take the top spot or you just enjoy seeing your progress visualized, it makes the experience at least a little more entertaining.
 
+Access it by clicking here - [Cloud Native Exams](https://9kk0rw7cvl.execute-api.us-east-1.amazonaws.com/#)
+
+A barebones diagram of the apps architecture is shown below (outdated)
+![App Arch](https://github.com/hydropero/CloudNativeExams/blob/main/practiceexamhsproject.drawio__1_.png?raw=true)
 
