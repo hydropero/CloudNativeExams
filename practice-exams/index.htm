@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<meta name='generator' content='ExamView HTML Generator 1.1.0'>
+	<meta name='robots' content='noindex,nofollow'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title>Quiz Navigation</title>
+	<style type='text/css'>
+		.spacer { line-height:.7em; }
+		.title { font-size:13pt; font-weight:bold; font-family:"Times New Roman", "Times", serif; color:#000000; }
+		.qnumber { font-size:12pt; font-family:"Times New Roman", "Times", serif; color:#000000; text-align:right; }
+		.choice { font-size:12pt; font-family:"Times New Roman", "Times", serif; color:#000000; }
+		.default { font-size:12pt; font-family:"Times New Roman", "Times", serif; color:#000000; }
+		.qinfo { font-size:12pt; font-family:"Times New Roman", "Times", serif; color:#000000; }
+		.points { font-size:8pt; font-family:"Times New Roman", "Times", serif; color:#000000; }
+		TD.pad { padding: 0pt 4pt 0pt 4pt; }
+		.font1 { font-family:"Times New Roman", "Times", serif; }
+	</style>
+<script type='text/javascript' language='JavaScript1.1'>
+
+/* Adds Element BEFORE NeighborElement */
+Element.prototype.appendBefore = function(element) {
+  element.parentNode.insertBefore(this, element);
+}, false;
+
+/* Adds Element AFTER NeighborElement */
+Element.prototype.appendAfter = function(element) {
+  element.parentNode.insertBefore(this, element.nextSibling);
+}, false;
+
+function generateRows(json_arrays_of_arrays){  
+    setTimeout(() => {
+    document.getElementById('progress_value').setAttribute("style", "width: 100%");
+    setTimeout(() => {
+      var parent = document.getElementById('tablebody')
+      while (parent.hasChildNodes()){
+            parent.removeChild(parent.firstChild);
+      }
+      var loadbar_parent = document.getElementById('dynamic-start')
+      while (loadbar_parent.hasChildNodes()){
+            loadbar_parent.removeChild(loadbar_parent.firstChild);
+      }
+      console.log(json_arrays_of_arrays);
+      var start_var = json_arrays_of_arrays.length - 1;
+      var count = 1;
+      for(let i = 0; i < json_arrays_of_arrays.length; i++) {
+
+          console.log(json_arrays_of_arrays[i]);
+          var inner_array = json_arrays_of_arrays[i];
+          tr_value = "tr" + count.toString()
+          tablerow = document.createElement('tr');
+          tablerow.id = tr_value;
+          tabledata1 = document.createElement('th');
+          tabledata1.id = "th1";
+          tabledata1.setAttribute('scope', "row")
+          tabledata1.innerHTML = i + 1;
+          tabledata2 = document.createElement('td');
+          tabledata2.id = "td2";
+          tabledata2.innerHTML = inner_array[0];
+          tabledata3 = document.createElement('td');
+          tabledata3.id = "td3";
+          tabledata3.innerHTML = inner_array[1].toString() + "%";
+          tabledata4 = document.createElement('td');
+          tabledata4.id = "td4";
+          tabledata4.innerHTML = inner_array[2];
+          tabledata5 = document.createElement('td');
+          tabledata5.id = "td5";
+          tabledata5.innerHTML = inner_array[3];
+          tabledata6 = document.createElement('td');
+          tabledata6.id = "td6";
+          tabledata6.innerHTML = inner_array[4];
+
+
+          tablerow.appendAfter(document.getElementById('tablebody'));
+          document.getElementById('tablebody').appendChild(tablerow)
+          document.getElementById(tr_value).appendChild(tabledata1);
+          document.getElementById(tr_value).appendChild(tabledata2);
+          document.getElementById(tr_value).appendChild(tabledata3);
+          document.getElementById(tr_value).appendChild(tabledata4);
+          document.getElementById(tr_value).appendChild(tabledata5);
+          document.getElementById(tr_value).appendChild(tabledata6);
+          count++;
+          
+      }
+    }, 300)
+  }, 1200)
+}
+
+function getHighScore(exam_num){
+    Element.prototype.appendAfter = function(element) {
+      element.parentNode.insertBefore(this, element.nextSibling);
+    }, false;
+    var progress_parent_check = document.getElementById('dynamic-start')
+    while (progress_parent_check.hasChildNodes()){
+        progress_parent_check.removeChild(progress_parent_check.firstChild);
+    }
+    var progress_bar_parent = document.createElement('div');
+    progress_bar_parent.setAttribute("class", "mx-auto");
+    progress_bar_parent.setAttribute("style", "width: 50%");
+    var progress_bar_html = `
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%" id="progress_value"></div>
+    </div><br>`;
+    progress_bar_parent.innerHTML = progress_bar_html;
+    document.getElementById('dynamic-start').appendChild(progress_bar_parent);
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+        "type": "highscore",
+        "exam_number": exam_num
+        });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+    setTimeout(() => {
+    document.getElementById('progress_value').setAttribute("style", "width: 60%");
+    var request_result;
+    fetch("https://9kk0rw7cvl.execute-api.us-east-1.amazonaws.com/querydata", requestOptions)
+    .then (response => response)
+    .then(response => response.json())
+    .catch(error => console.log('error', error))
+    .then(response => generateRows(response));
+    }, 800)
+}
+
+
+
+// let i = 0;   
+// while (i < request_result.length){
+//     console.log(request_result[i]);
+//     i++;
+// }
+
+
+
+
+
+</script>
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Navigation</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Exams
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="https://9kk0rw7cvl.execute-api.us-east-1.amazonaws.com/exam9">Exam 9</a>
+            <a class="dropdown-item" href="https://9kk0rw7cvl.execute-api.us-east-1.amazonaws.com/exam8">Exam 8</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Scoreboard Selector
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" onclick='getHighScore(9)'>Exam 9</a>
+              <a class="dropdown-item" onclick='getHighScore(8)'>Exam 8</a>
+            </div>
+          </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+<body class="vsc-initialized">
+
+<br>
+<br>
+<br>
+<div id="dynamic-start">
+</div>
+<div class="container" id="generated-content">
+<div class="alert alert-primary text-center" role="alert">
+    <span style="font-size: 160%">Top 10 High Scores</span> 
+</div>
+<table class="table table-hover table-dark">
+    <thead id="thead">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Shortname</th>
+          <th scope="col">Score</th>
+          <th scope="col">Time Elapsed</th>
+          <th scope="col">Date</th>
+          <th scope="col">Time</th>
+        </tr>
+      </thead>
+      <tbody id="tablebody">
+      </tbody>
+    
+</table>
+</div>
+
+ <!-- </body></html> -->
