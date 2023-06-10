@@ -1,6 +1,6 @@
 # CloudNativeExams
 
-## This project serves two primary purposes. The first, to continue growing and refining my AWS skillset by constructing something that provides genuine value to both friends and colleagues, in this instance turning a set of bland, JavaScript based, AWS practice exams into a cloud-native, serverless, full-stack application (hosted freely!) 
+### This project serves two primary purposes. The first, to continue growing and refining my AWS skillset by constructing something that provides genuine value to both friends and colleagues, in this instance turning a set of bland, JavaScript based, AWS practice exams into a cloud-native, serverless, full-stack application (hosted freely!) 
 
 Features include:
 - Persistent Score Saving
@@ -16,6 +16,6 @@ Features were implemented using a variety of AWS services:
 - S3 Static Web Hosting 
 - AWS API Gateway
 
-## The second purpose was to gamify the otherwise tiresome process of practice exam taking. Whether you're competitive and want to take the top spot or you just enjoy seeing your progress visualized, it makes the experience at least a little more entertaining.
+### The second purpose was to gamify the otherwise tiresome process of practice exam taking. Whether you're competitive and want to take the top spot or you just enjoy seeing your progress visualized, it makes the experience at least a little more entertaining.
 
 
